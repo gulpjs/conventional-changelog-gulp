@@ -18,6 +18,10 @@ function presetOpts(cb) {
         return;
       }
 
+      if (typeof commit.hash === 'string') {
+        commit.hash = commit.hash.substring(0, 7);
+      }
+
       return commit;
     },
     groupBy: 'tag',
