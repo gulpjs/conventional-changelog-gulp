@@ -1,7 +1,7 @@
 {
-  "name": "conventional-changelog-eslint",
+  "name": "conventional-changelog-gulp",
   "version": "0.1.0",
-  "description": "conventional-changelog eslint preset",
+  "description": "conventional-changelog gulp preset",
   "main": "index.js",
   "scripts": {
     "coverage": "istanbul cover _mocha -- -R spec && rm -rf ./coverage",
@@ -10,19 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stevemao/conventional-changelog-eslint.git"
+    "url": "git+https://github.com/gulpjs/conventional-changelog-gulp.git"
   },
   "keywords": [
     "conventional-changelog",
-    "eslint",
+    "gulp",
     "preset"
   ],
   "author": "Steve Mao",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stevemao/conventional-changelog-eslint/issues"
+    "url": "https://github.com/gulpjs/conventional-changelog-gulp/issues"
   },
-  "homepage": "https://github.com/stevemao/conventional-changelog-eslint#readme",
+  "homepage": "https://github.com/gulpjs/conventional-changelog-gulp#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "conventional-changelog-core": "0.0.2",
