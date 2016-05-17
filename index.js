@@ -17,15 +17,20 @@ var writerOpts = {
       return;
     }
 
+    if (commit.tag.toLowerCase() === 'release') {
+      return;
+    }
+
     if (typeof commit.hash === 'string') {
       commit.hash = commit.hash.substring(0, 7);
     }
 
     return commit;
   },
+  // TODO: sort groups
   groupBy: 'tag',
   commitGroupsSort: 'title',
-  commitsSort: ['tag', 'message']
+  commitsSort: ['tag', 'committerDate']
 };
 
 module.exports = Q.all([
