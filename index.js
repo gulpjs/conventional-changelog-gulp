@@ -1,4 +1,5 @@
 'use strict';
+
 var Q = require('q');
 var trim = require('lodash.trim');
 var readFile = Q.denodeify(require('fs').readFile);
@@ -8,19 +9,19 @@ var parserOpts = {
   headerPattern: /^(\w*)\: (.*?)(?:\((.*)\))?$/,
   headerCorrespondence: [
     'tag',
-    'message'
-  ]
+    'message',
+  ],
 };
 
 var tagOrder = {
-  'breaking': 0,
-  'fix': 1,
-  'new': 2,
-  'update': 3,
-  'docs': 4,
-  'upgrade': 5,
-  'build': 6,
-  'scaffold': 7
+  breaking: 0,
+  fix: 1,
+  new: 2,
+  update: 3,
+  docs: 4,
+  upgrade: 5,
+  build: 6,
+  scaffold: 7,
 };
 
 var writerOpts = {
@@ -61,13 +62,13 @@ var writerOpts = {
 
     return 0;
   },
-  commitsSort: ['tag', 'committerDate']
+  commitsSort: ['tag', 'committerDate'],
 };
 
 module.exports = Q.all([
   readFile(resolve(__dirname, 'templates/template.hbs'), 'utf-8'),
   readFile(resolve(__dirname, 'templates/header.hbs'), 'utf-8'),
-  readFile(resolve(__dirname, 'templates/commit.hbs'), 'utf-8')
+  readFile(resolve(__dirname, 'templates/commit.hbs'), 'utf-8'),
 ])
   .spread(function(template, header, commit) {
     writerOpts.mainTemplate = template;
@@ -76,6 +77,6 @@ module.exports = Q.all([
 
     return {
       parserOpts: parserOpts,
-      writerOpts: writerOpts
+      writerOpts: writerOpts,
     };
   });

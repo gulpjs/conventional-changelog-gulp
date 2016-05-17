@@ -1,13 +1,16 @@
 'use strict';
-var conventionalChangelogCore = require('conventional-changelog-core');
-var config = require('./');
-var expect = require('chai').expect;
+
+var expect = require('expect');
 var shell = require('shelljs');
 var through = require('through2');
 var writeFileSync = require('fs').writeFileSync;
+var conventionalChangelogCore = require('conventional-changelog-core');
 
-describe('eslint preset', function() {
-  before(function() {
+var preset = require('./');
+
+describe('gulp preset', function() {
+
+  before(function(done) {
     shell.config.silent = true;
     shell.rm('-rf', 'tmp');
     shell.mkdir('tmp');
@@ -25,26 +28,12 @@ describe('eslint preset', function() {
     shell.exec('git add --all && git commit -m"Docs: Fix unmatched paren in rule description"');
     writeFileSync('test5', '');
     shell.exec('git add --all && git commit -m"Merge pull request #3033 from gcochard/patch-3 "');
+    done();
   });
 
-  it('should work if there is no semver tag', function(done) {
-    conventionalChangelogCore({
-      config: config
-    })
-      .on('error', function(err) {
-        done(err);
-      })
-      .pipe(through(function(chunk) {
-        chunk = chunk.toString();
-
-        expect(chunk).to.include('the `no-class-assign` rule');
-        expect(chunk).to.include('### Fix');
-        expect(chunk).to.include('indent rule should recognize single line statements with ASI');
-        expect(chunk).to.include('### Docs');
-
-        expect(chunk).to.not.include('3033');
-
-        done();
-      }));
+  it('needs tests', function(done) {
+    conventionalChangelogCore({ preset: preset })
+      .pipe(through())
+      .on('finish', done);
   });
 });

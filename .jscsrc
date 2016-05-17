@@ -1,5 +1,3 @@
 {
-  "preset": "google",
-  "maximumLineLength": null,
-  "excludeFiles": ["node_modules/**"]
+  "preset": "gulp"
 }

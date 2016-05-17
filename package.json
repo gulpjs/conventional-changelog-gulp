@@ -1,41 +1,47 @@
 {
   "name": "conventional-changelog-gulp",
   "version": "0.1.0",
-  "description": "conventional-changelog gulp preset",
-  "main": "index.js",
-  "scripts": {
-    "coverage": "istanbul cover _mocha -- -R spec && rm -rf ./coverage",
-    "lint": "jshint *.js --exclude node_modules && jscs *.js",
-    "test": "mocha && npm run-script lint"
+  "description": "Conventional Changelog preset for gulp projects",
+  "author": "Gulp Team <team@gulpjs.com> (http://gulpjs.com/)",
+  "contributors": [],
+  "repository": "gulpjs/conventional-changelog-gulp",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gulpjs/conventional-changelog-gulp.git"
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "templates",
+    "convention.md"
+  ],
+  "scripts": {
+    "lint": "eslint . && jscs index.js test/",
+    "pretest": "npm run lint",
+    "test": "mocha --async-only",
+    "cover": "istanbul cover _mocha --report lcovonly",
+    "coveralls": "npm run cover && istanbul-coveralls"
+  },
+  "dependencies": {
+    "lodash.trim": "^4.4.0",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "conventional-changelog-core": "^1.5.0",
+    "eslint": "^1.7.3",
+    "eslint-config-gulp": "^2.0.0",
+    "expect": "^1.19.0",
+    "istanbul": "^0.4.3",
+    "istanbul-coveralls": "^1.0.3",
+    "jscs": "^2.3.5",
+    "jscs-preset-gulp": "^1.0.0",
+    "mocha": "^2.4.5",
+    "shelljs": "^0.7.0",
+    "through2": "^2.0.1"
   },
   "keywords": [
     "conventional-changelog",
     "gulp",
     "preset"
-  ],
-  "author": "Steve Mao",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gulpjs/conventional-changelog-gulp/issues"
-  },
-  "homepage": "https://github.com/gulpjs/conventional-changelog-gulp#readme",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "conventional-changelog-core": "0.0.2",
-    "coveralls": "^2.11.6",
-    "istanbul": "^0.4.2",
-    "jscs": "^2.9.0",
-    "jshint": "^2.9.1",
-    "mocha": "*",
-    "shelljs": "^0.5.3",
-    "through2": "^2.0.0"
-  },
-  "dependencies": {
-    "lodash.trim": "^4.4.0",
-    "q": "^1.4.1"
-  }
+  ]
 }
