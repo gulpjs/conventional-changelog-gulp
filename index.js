@@ -12,6 +12,17 @@ var parserOpts = {
   ]
 };
 
+var tagOrder = {
+  'breaking': 0,
+  'fix': 1,
+  'new': 2,
+  'update': 3,
+  'docs': 4,
+  'upgrade': 5,
+  'build': 6,
+  'scaffold': 7
+};
+
 var writerOpts = {
   transform: function(commit) {
     if (!commit.tag || typeof commit.tag !== 'string') {
@@ -34,7 +45,22 @@ var writerOpts = {
   },
   // TODO: sort groups
   groupBy: 'tag',
-  commitGroupsSort: 'title',
+  commitGroupsSort: function(a, b) {
+    var aTitle = a.title;
+    var bTitle = b.title;
+    var aOrder = tagOrder[aTitle.toLowerCase()];
+    var bOrder = tagOrder[bTitle.toLowerCase()];
+
+    if (aOrder < bOrder) {
+      return -1;
+    }
+
+    if (aOrder > bOrder) {
+      return 1;
+    }
+
+    return 0;
+  },
   commitsSort: ['tag', 'committerDate']
 };
 
