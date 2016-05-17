@@ -1,5 +1,6 @@
 'use strict';
 var Q = require('q');
+var trim = require('lodash.trim');
 var readFile = Q.denodeify(require('fs').readFile);
 var resolve = require('path').resolve;
 
@@ -23,6 +24,10 @@ var writerOpts = {
 
     if (typeof commit.hash === 'string') {
       commit.hash = commit.hash.substring(0, 7);
+    }
+
+    if (typeof commit.message === 'string') {
+      commit.message = trim(commit.message);
     }
 
     return commit;
